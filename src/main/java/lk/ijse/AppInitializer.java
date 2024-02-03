@@ -8,8 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 public class AppInitializer extends Application {
 
     public static void main(String[] args) {
@@ -17,7 +15,7 @@ public class AppInitializer extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
 
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);

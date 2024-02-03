@@ -8,15 +8,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scorePnae" prefHeight="567.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoginFormController">
+<AnchorPane fx:id="scorePnae" prefHeight="567.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ScoreListFormController">
    <children>
-      <ImageView fitHeight="576.0" fitWidth="852.0" layoutX="-1.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/forest.png" />
-         </image>
-      </ImageView>
+      <MediaView fx:id="mediaView" fitHeight="567.0" fitWidth="829.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane layoutX="97.0" layoutY="210.0" prefHeight="296.0" prefWidth="641.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 25;">
          <children>
             <ScrollPane fx:id="scrollPane" layoutX="12.0" layoutY="24.0" prefHeight="254.0" prefWidth="620.0" style="-fx-background-color: F4F4F4;">
