@@ -83,24 +83,24 @@ public class MainFormController {
 
     @FXML
     void btnPlayOnAction(ActionEvent event) throws IOException {
-        playAudio();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PLayForm.fxml"));
-        Parent root = loader.load();
-        if (root != null) {
-            Scene subScene = new Scene(root);
-            Stage stage = (Stage) this.loginPane.getScene().getWindow();
-            stage.setScene(subScene);
-
-            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
-            tt.setFromX(-subScene.getWidth());
-            tt.setToX(0);
-            tt.play();
-            stage.setScene(subScene);
-            stage.setResizable(false);
-            stage.show();
+//        playAudio();
+//
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PLayForm.fxml"));
+//        Parent root = loader.load();
+//        if (root != null) {
+//            Scene subScene = new Scene(root);
+//            Stage stage = (Stage) this.loginPane.getScene().getWindow();
+//            stage.setScene(subScene);
+//
+//            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+//            tt.setFromX(-subScene.getWidth());
+//            tt.setToX(0);
+//            tt.play();
+//            stage.setScene(subScene);
+//            stage.setResizable(false);
+//            stage.show();
+        System.out.println("Play");
         }
-    }
 
     @FXML
     void btnScoreListOnAction(ActionEvent event) throws IOException {

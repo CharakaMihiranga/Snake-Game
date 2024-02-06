@@ -57,8 +57,6 @@ public class ScoreListFormController {
 
     public void initialize(){
 
-
-
        new Thread(()->{
            backgroundAnimation();
        }).start();

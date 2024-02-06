@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane fx:id="PlayFormPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.PlayFormController">
-   <children>
-      <AnchorPane fx:id="graphicPane" layoutX="28.0" layoutY="102.0" prefHeight="426.0" prefWidth="747.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="102.0" />
-   </children>
-</AnchorPane>
