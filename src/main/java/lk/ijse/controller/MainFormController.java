@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -18,6 +20,7 @@ import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
 import java.io.*;
 
 public class MainFormController {
@@ -82,25 +85,12 @@ public class MainFormController {
     }
 
     @FXML
-    void btnPlayOnAction(ActionEvent event) throws IOException {
-//        playAudio();
-//
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PLayForm.fxml"));
-//        Parent root = loader.load();
-//        if (root != null) {
-//            Scene subScene = new Scene(root);
-//            Stage stage = (Stage) this.loginPane.getScene().getWindow();
-//            stage.setScene(subScene);
-//
-//            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
-//            tt.setFromX(-subScene.getWidth());
-//            tt.setToX(0);
-//            tt.play();
-//            stage.setScene(subScene);
-//            stage.setResizable(false);
-//            stage.show();
-        System.out.println("Play");
-        }
+    void btnPlayOnAction(ActionEvent event) throws Exception {
+
+        PlayForm playForm = new PlayForm();
+        playForm.start(new Stage());
+
+    }
 
     @FXML
     void btnScoreListOnAction(ActionEvent event) throws IOException {
