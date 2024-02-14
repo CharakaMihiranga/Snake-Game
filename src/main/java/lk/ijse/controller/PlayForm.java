@@ -14,8 +14,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -23,12 +31,13 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PlayForm extends Application {
 
     private static final int WIDTH = 800;
-    private static final int HEIGHT = WIDTH;
-    private static final int ROWS = 20;
-    private static final int COLUMNS = ROWS;
+    private static final int HEIGHT = 533;
+    private static final int ROWS = 32;
+    private static final int COLUMNS = 32;
     private static final int SQUARE_SIZE = WIDTH / ROWS;
     private static final String[] FOODS_IMAGE = new String[]{
             "/assets/Foods/ic_apple.png",
@@ -40,6 +49,8 @@ public class PlayForm extends Application {
             "/assets/Foods/ic_pomegranate.png",
             "/assets/Foods/ic_tomato.png",
             "/assets/Foods/ic_watermelon.png"};
+
+    private static final String food = "/assets/ScoreFruit.png";
 
     private static final int RIGHT = 0;
     private static final int LEFT = 1;
@@ -56,9 +67,14 @@ public class PlayForm extends Application {
     private int currentDirection;
     private int score = 0;
 
+    private double headXC = 200; // X-coordinate of snake head
+    private double headYC = 200; // Y-coordinate of snake head
+    private double headSize = 20; // Size of snake head
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("Snake");
+
         Group root = new Group();
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
@@ -112,7 +128,7 @@ public class PlayForm extends Application {
         drawBackground(gc);
         drawFood(gc);
         drawSnake(gc);
-        drawScore();
+        setScore();
 
         for (int i = snakeBody.size() - 1; i >= 1; i--) {
             snakeBody.get(i).x = snakeBody.get(i - 1).x;
@@ -154,15 +170,25 @@ public class PlayForm extends Application {
     private void generateFood() {
         start:
         while (true) {
-            foodX = (int) (Math.random() * ROWS);
-            foodY = (int) (Math.random() * COLUMNS);
+
+           int range = (20 - 1) + 1;
+           int foodXValue = (int)(Math.random() * range) + 1;
+           int foodYValue = (int) (Math.random() * range)+1;
+
+           if (foodXValue < 28 && foodYValue < 28){
+               foodX = foodXValue;
+               foodY = foodYValue;
+
+           }else{
+               generateFood();
+           }
 
             for (Point snake : snakeBody) {
                 if (snake.getX() == foodX && snake.getY() == foodY) {
                     continue start;
                 }
             }
-            foodImage = new Image(FOODS_IMAGE[(int) (Math.random() * FOODS_IMAGE.length)]);
+            foodImage = new Image(food);
             break;
         }
     }
@@ -171,15 +197,40 @@ public class PlayForm extends Application {
         gc.drawImage(foodImage, foodX * SQUARE_SIZE, foodY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
 
+//    private void drawSnake(GraphicsContext gc) {
+//
+//        gc.setFill(Color.web("4674E9"));
+//        gc.fillRoundRect(snakeHead.getX() * SQUARE_SIZE, snakeHead.getY() * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
+//
+//        for (int i = 1; i < snakeBody.size(); i++) {
+//            gc.fillRoundRect(snakeBody.get(i).getX() * SQUARE_SIZE, snakeBody.get(i).getY() * SQUARE_SIZE, SQUARE_SIZE - 1,
+//                    SQUARE_SIZE - 1, 20, 20);
+//        }
+//    }
+
     private void drawSnake(GraphicsContext gc) {
+        // Draw head
         gc.setFill(Color.web("4674E9"));
         gc.fillRoundRect(snakeHead.getX() * SQUARE_SIZE, snakeHead.getY() * SQUARE_SIZE, SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
 
+        // Draw eyes
+        double eyeSize = SQUARE_SIZE * 0.2;
+        gc.setFill(Color.BLACK);
+        gc.fillOval((snakeHead.getX() + 0.2) * SQUARE_SIZE, (snakeHead.getY() + 0.2) * SQUARE_SIZE, eyeSize, eyeSize);
+        gc.fillOval((snakeHead.getX() + 0.6) * SQUARE_SIZE, (snakeHead.getY() + 0.2) * SQUARE_SIZE, eyeSize, eyeSize);
+
+        // Draw mouth
+        gc.setFill(Color.RED);
+        gc.fillOval((snakeHead.getX() + 0.3) * SQUARE_SIZE, (snakeHead.getY() + 0.6) * SQUARE_SIZE, SQUARE_SIZE * 0.4, SQUARE_SIZE * 0.2);
+
+        // Draw body
+        gc.setFill(Color.web("4674E9"));
         for (int i = 1; i < snakeBody.size(); i++) {
             gc.fillRoundRect(snakeBody.get(i).getX() * SQUARE_SIZE, snakeBody.get(i).getY() * SQUARE_SIZE, SQUARE_SIZE - 1,
                     SQUARE_SIZE - 1, 20, 20);
         }
     }
+
 
     private void moveRight() {
         snakeHead.x++;
@@ -219,13 +270,21 @@ public class PlayForm extends Application {
         }
     }
 
-    private void drawScore() {
+    private void setScore() {
+        // Load the image
+        Image image = new Image("/assets/ScoreFruit.png");
+
+        // Draw the image on the canvas
+        gc.drawImage(image, 30, 20, 40, 40); // Adjust the coordinates and size as needed
+
+        // Set text properties
         gc.setFill(Color.WHITE);
-        gc.setFont(new Font("Digital-7", 35));
-        gc.fillText("Score: " + score, 10, 35);
+        gc.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 35)); // Comic Sans, bold, size 45
+        gc.setTextAlign(TextAlignment.LEFT);
+
+        // Draw the score text
+        gc.fillText(" "+ score, 50, 50); // Adjust the coordinates as needed
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }

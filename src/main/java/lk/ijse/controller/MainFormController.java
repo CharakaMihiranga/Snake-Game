@@ -88,7 +88,8 @@ public class MainFormController {
     void btnPlayOnAction(ActionEvent event) throws Exception {
 
         PlayForm playForm = new PlayForm();
-        playForm.start(new Stage());
+        Stage stage = (Stage) this.loginPane.getScene().getWindow();
+        playForm.start(stage);
 
     }
 
