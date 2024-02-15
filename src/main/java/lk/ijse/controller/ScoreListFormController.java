@@ -61,6 +61,12 @@ public class ScoreListFormController {
            backgroundAnimation();
        }).start();
 
+       setScore();
+
+    }
+
+    private void setScore() {
+
     }
 
     private void backgroundAnimation() {
@@ -73,8 +79,11 @@ public class ScoreListFormController {
 
     }
 
+
+
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
+
         playMusic = new PlayMusic();
         playMusic.stopAllBackgroundMusic();
         navigateToMainForm();

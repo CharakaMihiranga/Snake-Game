@@ -11,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
@@ -60,6 +62,7 @@ public class MainFormController {
 
     private void playBackgroundMusic() {
 
+
         playMusic.playBackgroundMusic(musicPath);
 
     }
@@ -87,8 +90,15 @@ public class MainFormController {
     @FXML
     void btnPlayOnAction(ActionEvent event) throws Exception {
 
+        playMusic.stopAllBackgroundMusic();
+
+        playAudio();
+
         PlayForm playForm = new PlayForm();
         Stage stage = (Stage) this.loginPane.getScene().getWindow();
+
+
+
         playForm.start(stage);
 
     }
@@ -103,6 +113,7 @@ public class MainFormController {
             Scene subScene = new Scene(root);
             Stage stage = (Stage) this.loginPane.getScene().getWindow();
             stage.setScene(subScene);
+
 
             TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
             tt.setFromX(-subScene.getWidth());
