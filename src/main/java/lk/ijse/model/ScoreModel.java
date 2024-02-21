@@ -9,10 +9,11 @@ import java.util.ArrayList;
 
 public class ScoreModel {
     public boolean save(ScoreDto dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("Insert into user values (?,?)",
-                dto.getName(),
+        return SQLUtil.execute("Insert into score values (?,?)",
+                dto.getDate(),
                 dto.getScore()
         );
+
     }
     public ArrayList<ScoreDto> getAll() throws SQLException, ClassNotFoundException {
 
@@ -21,7 +22,7 @@ public class ScoreModel {
 
         while (resultSet.next()){
             ScoreDto dto = new ScoreDto(
-                    resultSet.getString(1),
+                    resultSet.getDate(1).toLocalDate(),
                     resultSet.getInt(2)
             );
             scores.add(dto);

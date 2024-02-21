@@ -40,6 +40,16 @@
                   <Font name="Comic Sans MS Bold" size="39.0" />
                </font>
             </Label>
+            <Label layoutX="196.0" layoutY="14.0" text="Date">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="476.0" layoutY="14.0" text="Score">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="30.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Label layoutX="262.0" layoutY="32.0" prefHeight="70.0" prefWidth="333.0" text="Score Board" textFill="WHITE">

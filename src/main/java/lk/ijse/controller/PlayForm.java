@@ -23,11 +23,15 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import lk.ijse.dto.ScoreDto;
+import lk.ijse.model.ScoreModel;
 
 import javax.sound.sampled.*;
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -320,6 +324,25 @@ public class PlayForm extends Application {
         PlayMusic playMusic = new PlayMusic();
         playMusic.stopAllBackgroundMusic();
 
+        int playedScore = score;
+
+        System.out.println("Score :"+playedScore);
+
+        ScoreModel scoreModel = new ScoreModel();
+
+        boolean saved;
+
+
+        try{
+           saved =  scoreModel.save(new ScoreDto(
+                    LocalDate.now(),
+                    playedScore
+            ));
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (saved){
 
         playAudio("D:\\GDSE68\\PROJECTS\\CourseWorks\\New folder\\Snake-Game\\src\\main\\resources\\sounds\\gameOver.wav");
 
@@ -350,6 +373,8 @@ public class PlayForm extends Application {
 
             stage.setResizable(false);
             stage.show();
+
+            }
         }
     }
 
